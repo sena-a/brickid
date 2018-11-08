@@ -1,5 +1,44 @@
-$main-color: skyblue;
+@charset "utf-8";
+// @import url("normalize.css");
+
+$main-color: white;
+
+.readable-hidden{
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+ul {
+  list-style: none;
+}
 
 body {
-  background-color: $main-color;
+  background: $main-color;
+}
+
+.menu{
+  width: 350px;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  left:0;
+  background: rgb(255, 255, 72);
+  transform: translateX(-100%);
+  transition: all 800ms;
+}
+
+.act.menu{
+  transform: translateX(0);
+}
+
+.list-title{
+  text-transform: uppercase;
+}
+
+.product-thumb{
+  cursor: pointer;
 }

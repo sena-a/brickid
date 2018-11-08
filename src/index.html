@@ -4,11 +4,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>쇼핑몰!</title>
+  <title>Bricks for kidult</title>
   <link rel="stylesheet" href="./index.scss">
 </head>
 <body>
-  <!-- 템플릿을 이곳에 작성해주세요 -->
+<!-- 메뉴바 -->
+  <nav class="menu act">
+    <h2 class="readable-hidden">main menu</h2>
+    <button class="signin">SIGN IN</button>
+    <button class="signup">SIGN UP</button>
+    <ul class="category">
+      <li class="bear">BEAR BRICK</li>
+      <li class="ku">KUBRICK</li>
+      <li class="lego">BRICKHEADZ</li>
+    </ul>
+  </nav>
+<!-- 메인페이지 -->
+  <template id="main-page">
+    <span>메인페이지</span>
+  </template>
+
+<!-- 로그인 폼 -->
+  <template id="login-form">
+    <form class="login-form">
+      <input type="text" name="username">
+      <input type="text" name="password">
+      <button class="signin">SIGN IN</button>
+      <button class="signup">SIGN UP</button>
+    </form>
+  </template>
+
+<!-- 상품 목록 페이지 -->
+  <template id="list-page">
+    <p class="list-title"></p>
+    <div class="product-list"></div>
+  </template>
+
+  <!-- 각 상품에 대한 프리뷰를 목록 페이지에 넣어줌 -->
+  <template id="product-item">
+    <figure>
+      <img class="product-thumb">
+      <figcaption>
+        <p class="product-title"></p>
+        <p class="product-amount"></p>
+      </figcaption>
+    </figure>
+  </template>
+
+<!-- 상품 상세 페이지 -->
+  <template id="product-page">
+    <p class="category-title"></p>
+    <p class="title"></p>
+    <img class="image">
+    <div class="info">
+      <dl class="description">
+        <dt class="term readable-hidden">상품 설명</dt>
+        <dd></dd>
+      </dl>
+      <dl class="quantity">
+        <dt class="term">수량</dt>
+        <dd class="readable-hidden">수량을 입력해주세요</dd>
+        <select id="quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </dl>
+      <dl class="amount">
+        <dt class="term">Total</dt>
+        <dd></dd>
+      </dl>
+    </div>
+    <button class="to-cart">add Cart</button>
+    <button class="order">Order</button>
+  </template>
+
+<!-- 카트 페이지 -->
+  <template id="cart">
+    <h2 class="cart-title">CART</h2>
+    <ul class="cart-list"></ul>
+    <button class="cart-order">ORDER</button>
+  </template>
+
+  <!-- 카트 아이템 -->
+  <template id="cart-item">
+    <li class="cart-item">
+      <input type="checkbox">
+      <img class="cart-item-img">
+      <p class="cart-item-title"></p>
+      <input type="text" class="cart-item-quantity" disabled>
+      <button class="increase">+</button>
+      <button class="decrease">-</button>
+      <p class="cart-item-amount"></p>
+      <button class="cart-item-order">ORDER</button>
+      <button class="cart-item-delete">Delete</button>
+    </li>
+  </template>
+
 
   <div class="root"></div>
   <script src="./index.js"></script>
