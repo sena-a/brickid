@@ -144,7 +144,7 @@ async function productDetail(id){
       productId: id
     }
   })
-  const price = option.price
+  const price = option[0].price
 
   // 4. 내용 채우기
   categoryEl.textContent = productItem.category
@@ -264,7 +264,7 @@ async function drawCart(){
   cartTotalAmountEl.textContent = totalAmount
 
   // 5. 이벤트 리스너 등록하기
-  // 주문버튼
+  // 주문버튼 입력
 
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = ''
