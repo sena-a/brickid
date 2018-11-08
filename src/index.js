@@ -23,7 +23,10 @@ const templates = {
   productItem: document.querySelector('#product-item').content,
   productPage: document.querySelector('#product-page').content,
   cart: document.querySelector('#cart').content,
-  cartItem: document.querySelector('#cart-item').content
+  cartItem: document.querySelector('#cart-item').content,
+  ordered: document.querySelector('#ordered').content,
+  eachOrdered: document.querySelector('#each-ordered').content,
+  orderedItem: document.querySelector('#ordered-item').content
 }
 
 const rootEl = document.querySelector('.root')
@@ -192,11 +195,19 @@ async function drawCart(){
   let totalAmount = 0
 
   // 3. 필요한 데이터 불러오기
+  // 옵션 정보가 있는 카트아이템들의 배열
   const {data: cartItemList} = await api.get('/cartItems',{
     params:{
       ordered: false,
       _expand: 'option'
     }
+  })
+
+  // 카트아이템에 있는 product 정보들의 배열
+  const params = new URLSearchParams()
+  cartItemList.forEach(c => params.append('id', c.option.productId))
+  const {data: product} = await api.get('/products', {
+    params
   })
 
   // 4. 내용 채우기
@@ -215,14 +226,13 @@ async function drawCart(){
     const deleteEl = frag.querySelector('.cart-item-delete')
 
     // 3. 필요한 데이터 불러오기
-    const {data: option} = await api.get('/options/'+cartItem.optionId)
-    const {data: product} = await api.get('/products/'+option.productId)
+    const itemProduct = product.find(item => item.id === cartItem.option.productId)
 
     // 4. 내용 채우기
-    imgEl.setAttribute('src', product.mainImgUrl)
-    titleEl.textContent = product.title
+    imgEl.setAttribute('src', itemProduct.mainImgUrl)
+    titleEl.textContent = itemProduct.title
     quantityEl.setAttribute('value', cartItem.quantity)
-    amountEl.textContent = total(option.price, cartItem.quantity)
+    amountEl.textContent = total(cartItem.option.price, cartItem.quantity)
     totalAmount += cartItem.option.price
 
     // 5. 이벤트 리스너 등록하기
@@ -235,16 +245,22 @@ async function drawCart(){
           quantity : ++cartItem.quantity
         })
         quantityEl.setAttribute('value', cartItem.quantity)
+        amountEl.textContent = total(cartItem.option.price, cartItem.quantity)
+        totalAmount += cartItem.option.price
+        cartTotalAmountEl.textContent = totalAmount
       }
     })
 
     // 수량 감소
     decreaseEl.addEventListener('click', async e=> {
-      if(cartItem.quantity > 2){
+      if(cartItem.quantity > 1){
         await api.patch('cartItems/'+cartItem.id, {
           quantity : --cartItem.quantity
         })
         quantityEl.setAttribute('value', cartItem.quantity)
+        amountEl.textContent = total(cartItem.option.price, cartItem.quantity)
+        totalAmount -= cartItem.option.price
+        cartTotalAmountEl.textContent = totalAmount
       }
     })
 
@@ -264,8 +280,104 @@ async function drawCart(){
   cartTotalAmountEl.textContent = totalAmount
 
   // 5. 이벤트 리스너 등록하기
-  // 주문버튼 입력
 
+  // 주문하기
+  orderEl.addEventListener('click', async e=> {
+    // 방금 주문한 정보 객체 생성
+    const {data: {id: orderId}} = await api.post('/orders', {
+      orderTime: Date.now() // 현재 시각을 나타내는 정수
+    })
+
+    for(const cartItem of cartItemList){
+      // 위에서 만든 주문 객체의 id를 각 장바구니 항목의 orderId에 넣어줍니다.
+      await api.patch('/cartItems/'+cartItem.id, {
+        ordered: true,
+        orderId
+      })
+    }
+    // 작업이 끝났으면 주문 페이지 로드
+    drawOrder()
+  })
+
+  // 6. 템플릿을 문서에 삽입
+  rootEl.textContent = ''
+  rootEl.appendChild(frag)
+}
+
+async function drawOrder(){
+  // 1. 템플릿 복사
+  const frag = document.importNode(templates.ordered, true)
+  // 2. 요소 선택
+  const orderedListEl = frag.querySelector('.ordered-list')
+
+  // 3. 필요한 데이터 불러오기
+  // 주문별로 주문된 아이템들이 배열로 들어있는 주문별 객체를 요소들로 가지고 있는 배열ㅋㅋㅋ
+  const {data: orderList} = await api.get('/orders',{
+    params: {
+      _embed: 'cartItems'
+    }
+  })
+
+  // products 정보가 있는 옵션들의 배열
+  const params = new URLSearchParams()
+  orderList.forEach(c => c.cartItems.forEach(c => params.append('id', c.optionId)))
+  params.append('_expand', 'product')
+
+  const {data: options} = await api.get('/options', {
+    params
+  })
+
+  // 4. 내용 채우기
+
+  for(const eachOrdered of orderList){
+    // 1. 템플릿 복사
+    const frag = document.importNode(templates.eachOrdered, true)
+
+    // 2. 요소 선택
+    const eachOrderedListEl = frag.querySelector('.each-ordered-list')
+    const orderedAmount = frag.querySelector('.ordered-total-amount')
+    let totalAmount = 0;
+
+    // 3. 필요한 데이터 불러오기
+    const {cartItems: orderedItemList} = eachOrdered
+    console.log(orderedItemList)
+
+    // 4. 내용 채우기
+    for(const itemList of orderedItemList){
+      // 1. 템플릿 복사
+      const frag = document.importNode(templates.orderedItem, true)
+
+      // 2. 요소 선택
+      const orderedItem = frag.querySelector('.ordered-item')
+
+      const itemImage = orderedItem.querySelector('.ordered-item-img')
+      const itemTitle = orderedItem.querySelector('.ordered-item-title')
+      const quantityEl = orderedItem.querySelector('.ordered-item-quantity')
+      const amountEl = orderedItem.querySelector('.ordered-item-amount')
+      // 3. 필요한 데이터 불러오기
+      const itemOption = options.find(item => item.id === itemList.optionId)
+      console.log(itemOption)
+
+      const itemAmount = total(itemOption.price, itemList.quantity)
+      // 4. 내용 채우기
+      itemImage.setAttribute('src', itemOption.product.mainImgUrl)
+      itemTitle.textContent = itemOption.product.title
+      quantityEl.textContent = itemList.quantity
+      amountEl.textContent = itemAmount
+
+      totalAmount +=itemAmount
+      // 5. 이벤트 리스너 등록하기
+      // 6. 템플릿을 문서에 삽입
+      eachOrderedListEl.appendChild(frag)
+    }
+
+    orderedAmount.textContent = totalAmount
+    // 5. 이벤트 리스너 등록하기
+    // 6. 템플릿을 문서에 삽입
+    orderedListEl.appendChild(frag)
+  }
+
+  // 5. 이벤트 리스너 등록하기
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = ''
   rootEl.appendChild(frag)
