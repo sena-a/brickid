@@ -139,8 +139,12 @@ async function productDetail(id){
   // 3. 필요한 데이터 불러오기
   // 해당 상품 자원 불러오기
   const {data: productItem} = await api.get('/products/'+id)
-  const res = await api.get('/options/'+id)
-  const price = res.data.price
+  const {data: option} = await api.get('/options',{
+    params:{
+      productId: id
+    }
+  })
+  const price = option.price
 
   // 4. 내용 채우기
   categoryEl.textContent = productItem.category
@@ -161,9 +165,13 @@ async function productDetail(id){
   })
 
   // 장바구니 담기&장바구니 페이지로 이동
-  cartButtonEl.addEventListener('click', e=>{
+  cartButtonEl.addEventListener('click', async e=>{
     // 장바구니 담기
-
+    await api.post('/cartItems',{
+      optionId: option[0].id,
+      quantity: parseInt(quantityEl.value),
+      ordered: false
+    })
     // 장바구니 페이지로 이동
     drawCart()
   })
@@ -176,51 +184,91 @@ async function productDetail(id){
 // 카트 페이지
 async function drawCart(){
   // 1. 템플릿 복사
-  const frag = document.importNode('templates.cart', true)
+  const frag = document.importNode(templates.cart, true)
   // 2. 요소 선택
   const cartListEl = frag.querySelector('.cart-list')
+  const cartTotalAmountEl = frag.querySelector('.cart-amount .total-amount')
+  const orderEl = frag.querySelector('.cart-order')
+  let totalAmount = 0
+
   // 3. 필요한 데이터 불러오기
   const {data: cartItemList} = await api.get('/cartItems',{
     params:{
-      orderId: -1
+      ordered: false,
+      _expand: 'option'
     }
   })
+
   // 4. 내용 채우기
 
   for(const cartItem of cartItemList){
     // 1. 템플릿 복사
-    const frag = document.importNode('templates.cartItem', true)
+    const frag = document.importNode(templates.cartItem, true)
 
     // 2. 요소 선택
     const imgEl = frag.querySelector('.cart-item-img')
     const titleEl = frag.querySelector('.cart-item-title')
     const quantityEl = frag.querySelector('.cart-item-quantity')
     const amountEl = frag.querySelector('.cart-item-amount')
+    const increaseEl = frag.querySelector('.increase')
+    const decreaseEl = frag.querySelector('.decrease')
+    const deleteEl = frag.querySelector('.cart-item-delete')
 
     // 3. 필요한 데이터 불러오기
-    const product = await api.get('/products/'+cartItem.id)
-    const option = await api.get('/options/'+cartItem.id)
+    const {data: option} = await api.get('/options/'+cartItem.optionId)
+    const {data: product} = await api.get('/products/'+option.productId)
 
     // 4. 내용 채우기
     imgEl.setAttribute('src', product.mainImgUrl)
     titleEl.textContent = product.title
     quantityEl.setAttribute('value', cartItem.quantity)
     amountEl.textContent = total(option.price, cartItem.quantity)
+    totalAmount += cartItem.option.price
 
     // 5. 이벤트 리스너 등록하기
 
     // 수량 변경 시 수량/금액 갱신
+    // 수량 증가
+    increaseEl.addEventListener('click', async e=> {
+      if(cartItem.quantity < 5){
+        await api.patch('cartItems/'+cartItem.id, {
+          quantity : ++cartItem.quantity
+        })
+        quantityEl.setAttribute('value', cartItem.quantity)
+      }
+    })
+
+    // 수량 감소
+    decreaseEl.addEventListener('click', async e=> {
+      if(cartItem.quantity > 2){
+        await api.patch('cartItems/'+cartItem.id, {
+          quantity : --cartItem.quantity
+        })
+        quantityEl.setAttribute('value', cartItem.quantity)
+      }
+    })
 
     // 제거버튼 클릭 시 해당 카트 아이템 제거
-
-    // 오더버튼 클릭 시 주문내역으로 이동
+    deleteEl.addEventListener('click', async e=> {
+      // 해당 카트 아이템 제거하고
+      await api.delete('cartItems/'+cartItem.id)
+      // 다시 카트페이지 그리기
+      drawCart()
+    })
 
     // 6. 템플릿을 문서에 삽입
     cartListEl.appendChild(frag)
   }
 
+  // 총금액 표시
+  cartTotalAmountEl.textContent = totalAmount
+
   // 5. 이벤트 리스너 등록하기
+  // 주문버튼
+
   // 6. 템플릿을 문서에 삽입
+  rootEl.textContent = ''
+  rootEl.appendChild(frag)
 }
 
 // 메뉴 이벤트리스너
