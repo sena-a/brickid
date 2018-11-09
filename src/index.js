@@ -132,7 +132,7 @@ async function productDetail(id){
   const frag = document.importNode(templates.productPage, true)
   // 2. 요소 선택
   const categoryEl = frag.querySelector('.category-title')
-  const titleEl = frag.querySelector('.title')
+  const titleEl = frag.querySelector('.item-title')
   const imageEl = frag.querySelector('.image')
   const descriptionEl = frag.querySelector('.info .description').querySelector('dd')
   const quantityEl = frag.querySelector('.info .quantity').querySelector('select')
@@ -406,11 +406,12 @@ async function drawOrder(){
 
 // 메뉴 이벤트리스너
 const menuEl = document.querySelector('.menu')
-const signinEl = document.querySelector('.menu .signin')
+const footerEl = document.querySelector('.footer')
+const signinEl = footerEl.querySelector('.signin')
+const signupEl = footerEl.querySelector('.signup')
 
 signinEl.addEventListener('click', e=>{
   loginForm()
-  menuEl.classList.remove('act')
 })
 
 // 로고 클릭 시 메인 페이지로 이동
@@ -441,26 +442,33 @@ const orderedEl = categoryEl.querySelector('.ordered')
 const aboutEl = categoryEl.querySelector('.about')
 
 bearEl.addEventListener('click', e=>{
+  menuEl.classList.remove('act')
   rootEl.textContent=''
   productList('bearbrick')
 })
 
 kuEl.addEventListener('click', e=>{
+  menuEl.classList.remove('act')
   rootEl.textContent=''
   productList('kubrick')
 })
 
 legoEl.addEventListener('click', e=>{
+  menuEl.classList.remove('act')
   rootEl.textContent=''
   productList('brickheadz')
 })
 
 cartEl.addEventListener('click', e=>{
+  e.preventDefault()
+  menuEl.classList.remove('act')
   rootEl.textContent=''
   drawCart()
 })
 
 orderedEl.addEventListener('click', e=>{
+  e.preventDefault()
+  menuEl.classList.remove('act')
   rootEl.textContent=''
   drawOrder()
 })

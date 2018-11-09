@@ -17,8 +17,6 @@
 <!-- 메뉴바 -->
   <nav class="menu">
     <h2 class="readable-hidden">main menu</h2>
-    <button class="signin">SIGN IN</button>
-    <button class="signup">SIGN UP</button>
     <div class="menubar">
       <div class="top"></div>
       <div class="middle"></div>
@@ -35,7 +33,18 @@
   </nav>
 <!-- 메인페이지 -->
   <template id="main-page">
-    <span>메인페이지</span>
+    <h2 class="title">NEW ARRIVAL</h2>
+    <ul class="image-container">
+      <li>
+        <img src ="https://cdn.glitch.com/26f7c4bd-e5b9-48d4-bf91-9b4e11d3abc2%2Flego_starwaz.jpeg?1541573907292" class="new-image">
+      </li>
+      <li>
+        <img src ="https://cdn.glitch.com/26f7c4bd-e5b9-48d4-bf91-9b4e11d3abc2%2Fbearb_anemone.jpeg?1541573905360" class="new-image">
+      </li>
+      <li>
+        <img src ="https://cdn.glitch.com/26f7c4bd-e5b9-48d4-bf91-9b4e11d3abc2%2Fkub_no290.jpeg?1541578926774" class="new-image">
+      </li>
+    </ul>
   </template>
 
 <!-- 로그인 폼 -->
@@ -68,7 +77,7 @@
 <!-- 상품 상세 페이지 -->
   <template id="product-page">
     <p class="category-title"></p>
-    <p class="title"></p>
+    <p class="item-title"></p>
     <img class="image">
     <div class="info">
       <dl class="description">
@@ -144,6 +153,14 @@
   </template>
 
   <div class="root"></div>
+
+  <div class="footer">
+    <button class="signin">SIGN IN</button>
+    <button class="signup">SIGN UP</button>
+    <small class="copyright">
+        Copyright &copy; serendipity ALL RIGHTS RESERVED.
+    </small>
+  </div>
 </div>
   <script src="./index.js"></script>
 </body>
