@@ -128,7 +128,7 @@
       <div class=cart-info>
         <p class="cart-item-title"></p>
         <div class="cart-btn">
-        <input type="number" class="cart-item-quantity" max="5" disabled>
+          <input type="number" class="cart-item-quantity" max="5" disabled>
           <button class="increase">+</button>
           <button class="decrease">-</button>
          </div>
@@ -145,19 +145,27 @@
   </template>
   <!-- 하나의 주문 내역 -->
   <template id="each-ordered">
-    <ul class="each-ordered-list"></ul>
-    <dl class="ordered-amount">
-      <dt class="ordered-total">Total</dt>
-      <dd class="ordered-total-amount"></dd>
-    </dl>
+    <div class="each-ordered-container">
+      <h3 class="ordered-id"></h3>
+      <ul class="each-ordered-list">
+        <dl class="ordered-amount">
+          <dt class="ordered-total">TOTAL</dt>
+          <dd class="ordered-total-amount"></dd>
+        </dl>
+      </ul>
+    </div>
   </template>
   <!-- 하나의 주문 내역 속 각 아이템 -->
   <template id="ordered-item">
     <li class="ordered-item">
       <img class="ordered-item-img">
-      <p class="ordered-item-title"></p>
-      <p class="ordered-item-quantity"></p>
-      <p class="ordered-item-amount"></p>
+      <div class="ordered-item-info">
+        <p class="ordered-item-title"></p>
+        <div class="quantity-amount-info">
+        <p class="ordered-item-quantity"></p>
+        <p class="ordered-item-amount"></p>
+      </div>
+      </div>
     </li>
   </template>
 
@@ -167,7 +175,7 @@
     <button class="signin">SIGN IN</button>
     <button class="signup">SIGN UP</button>
     <small class="copyright">
-        Copyright &copy; serendipity ALL RIGHTS RESERVED.
+        Copyright &copy; serendipity.sena ALL RIGHTS RESERVED.
     </small>
   </div>
 </div>

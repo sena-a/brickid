@@ -256,13 +256,14 @@ async function drawCart(){
     titleEl.textContent = itemProduct.title
     quantityEl.setAttribute('value', cartItem.quantity)
     amountEl.textContent = total(cartItem.option.price, cartItem.quantity)
-    totalAmount += cartItem.option.price
+    totalAmount += parseInt(amountEl.textContent)
 
     // 5. 이벤트 리스너 등록하기
 
     // 수량 변경 시 수량/금액 갱신
     // 수량 증가
     increaseEl.addEventListener('click', async e=> {
+      e.preventDefault()
       if(cartItem.quantity < 5){
         await api.patch('cartItems/'+cartItem.id, {
           quantity : ++cartItem.quantity
@@ -276,6 +277,7 @@ async function drawCart(){
 
     // 수량 감소
     decreaseEl.addEventListener('click', async e=> {
+      e.preventDefault()
       if(cartItem.quantity > 1){
         await api.patch('cartItems/'+cartItem.id, {
           quantity : --cartItem.quantity
@@ -359,12 +361,15 @@ async function drawOrder(){
     // 2. 요소 선택
     const eachOrderedListEl = frag.querySelector('.each-ordered-list')
     const orderedAmount = frag.querySelector('.ordered-total-amount')
+    const orderedIdEl = frag.querySelector('.ordered-id')
     let totalAmount = 0;
 
     // 3. 필요한 데이터 불러오기
     const {cartItems: orderedItemList} = eachOrdered
 
     // 4. 내용 채우기
+    orderedIdEl.textContent = orderList.indexOf(eachOrdered) + 1
+
     for(const itemList of orderedItemList){
       // 1. 템플릿 복사
       const frag = document.importNode(templates.orderedItem, true)
@@ -393,6 +398,7 @@ async function drawOrder(){
     }
 
     orderedAmount.textContent = totalAmount
+
     // 5. 이벤트 리스너 등록하기
     // 6. 템플릿을 문서에 삽입
     orderedListEl.appendChild(frag)
@@ -418,6 +424,8 @@ signinEl.addEventListener('click', e=>{
 const logoEl = document.querySelector('.logo')
 
 logoEl.addEventListener('click', e => {
+  e.preventDefault()
+  menuEl.classList.remove('act')
   rootEl.textContent = ''
   drawMain()
 })
