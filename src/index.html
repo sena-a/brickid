@@ -76,43 +76,48 @@
 
 <!-- 상품 상세 페이지 -->
   <template id="product-page">
-    <p class="category-title"></p>
+    <h2 class="category-title title"></h2>
     <p class="item-title"></p>
-    <img class="image">
-    <div class="info">
-      <dl class="description">
-        <dt class="term readable-hidden">상품 설명</dt>
-        <dd></dd>
-      </dl>
-      <dl class="quantity">
-        <dt class="term">수량</dt>
-        <dd class="readable-hidden">수량을 입력해주세요</dd>
-        <select id="quantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </dl>
-      <dl class="amount">
-        <dt class="term">Total</dt>
-        <dd></dd>
-      </dl>
-    </div>
-    <button class="to-cart">add Cart</button>
-    <button class="fast-order">Order</button>
+    <div class="product-container">
+      <img class="image">
+      <div class="line"></div>
+      <div class="info">
+        <dl class="description">
+          <dt class="term readable-hidden">상품 설명</dt>
+          <dd></dd>
+        </dl>
+        <dl class="quantity">
+          <dt class="term readable-hidden">수량</dt>
+          <dd class="readable-hidden">수량을 입력해주세요</dd>
+          <select id="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </dl>
+        <dl class="amount">
+          <dt class="term">Total</dt>
+          <dd></dd>
+        </dl>
+        <button class="to-cart">CART</button>
+        <button class="fast-order">ORDER</button>
+      </div>
+   </div>
   </template>
 
 <!-- 카트 페이지 -->
   <template id="cart">
     <h2 class="cart-title title">CART</h2>
     <ul class="cart-list"></ul>
-    <dl class="cart-amount">
-      <dt class="total">Total</dt>
-      <dd class="total-amount"></dd>
-    </dl>
-    <button class="cart-order">ORDER</button>
+    <div class="cart-footer">
+      <dl class="cart-amount">
+        <dt class="total">Total</dt>
+        <dd class="total-amount"></dd>
+      </dl>
+      <button class="cart-order">ORDER</button>
+    </div>
   </template>
 
   <!-- 카트 아이템 -->
@@ -120,12 +125,16 @@
     <li class="cart-item">
       <!-- <input type="checkbox"> -->
       <img class="cart-item-img">
-      <p class="cart-item-title"></p>
-      <input type="number" class="cart-item-quantity" max="5" disabled>
-      <button class="increase">+</button>
-      <button class="decrease">-</button>
-      <p class="cart-item-amount"></p>
-      <button class="cart-item-delete">DELETE</button>
+      <div class=cart-info>
+        <p class="cart-item-title"></p>
+        <div class="cart-btn">
+        <input type="number" class="cart-item-quantity" max="5" disabled>
+          <button class="increase">+</button>
+          <button class="decrease">-</button>
+         </div>
+        <p class="cart-item-amount"></p>
+        <button class="cart-item-delete">DELETE</button>
+    </div>
     </li>
   </template>
 
