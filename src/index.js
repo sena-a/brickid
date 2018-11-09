@@ -138,6 +138,7 @@ async function productDetail(id){
   const quantityEl = frag.querySelector('.info .quantity').querySelector('select')
   const amountEl = frag.querySelector('.info .amount').querySelector('dd')
   const cartButtonEl = frag.querySelector('.to-cart')
+  const orderEl = frag.querySelector('.fast-order')
 
   // 3. 필요한 데이터 불러오기
   // 해당 상품 자원 불러오기
@@ -178,6 +179,28 @@ async function productDetail(id){
     // 장바구니 페이지로 이동
     drawCart()
   })
+
+  // 즉시 주문
+  // orderEl.addEventListener('click', async e=> {
+  //   // 장바구니 담기
+  //   await api.post('/cartItems',{
+  //     optionId: option[0].id,
+  //     quantity: parseInt(quantityEl.value),
+  //     ordered: true
+  //   })
+
+  //   const {data: {id: orderId}} = await api.post('/orders', {
+  //     orderTime: Date.now() // 현재 시각을 나타내는 정수
+  //   })
+
+  //   for(const cartItem of cartItemList){
+  //     // 위에서 만든 주문 객체의 id를 각 장바구니 항목의 orderId에 넣어줍니다.
+  //     await api.patch('/cartItems/'+cartItem.id, {
+  //       ordered: true,
+  //       orderId
+  //     })
+  //   }
+  // })
 
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = ''
@@ -340,7 +363,6 @@ async function drawOrder(){
 
     // 3. 필요한 데이터 불러오기
     const {cartItems: orderedItemList} = eachOrdered
-    console.log(orderedItemList)
 
     // 4. 내용 채우기
     for(const itemList of orderedItemList){
@@ -356,7 +378,6 @@ async function drawOrder(){
       const amountEl = orderedItem.querySelector('.ordered-item-amount')
       // 3. 필요한 데이터 불러오기
       const itemOption = options.find(item => item.id === itemList.optionId)
-      console.log(itemOption)
 
       const itemAmount = total(itemOption.price, itemList.quantity)
       // 4. 내용 채우기
@@ -392,26 +413,59 @@ signinEl.addEventListener('click', e=>{
   menuEl.classList.remove('act')
 })
 
+// 로고 클릭 시 메인 페이지로 이동
+const logoEl = document.querySelector('.logo')
+
+logoEl.addEventListener('click', e => {
+  rootEl.textContent = ''
+  drawMain()
+})
+
+// 메뉴바 클릭 이벤트 리스너
+const barEl = document.querySelector('.menu .menubar')
+barEl.addEventListener('click', e=> {
+  e.preventDefault()
+  if(menuEl.classList.contains('act')){
+      menuEl.classList.remove('act')
+  }else{
+      menuEl.classList.add('act')
+  }
+})
 // 상품 목록 페이지 이동 이벤트리스너
 const categoryEl = document.querySelector('.menu .category')
 const bearEl = categoryEl.querySelector('.bear')
 const kuEl = categoryEl.querySelector('.ku')
 const legoEl = categoryEl.querySelector('.lego')
+const cartEl = categoryEl.querySelector('.cart')
+const orderedEl = categoryEl.querySelector('.ordered')
+const aboutEl = categoryEl.querySelector('.about')
 
 bearEl.addEventListener('click', e=>{
+  rootEl.textContent=''
   productList('bearbrick')
-  menuEl.classList.remove('act')
 })
 
 kuEl.addEventListener('click', e=>{
+  rootEl.textContent=''
   productList('kubrick')
-  menuEl.classList.remove('act')
 })
 
 legoEl.addEventListener('click', e=>{
+  rootEl.textContent=''
   productList('brickheadz')
-  menuEl.classList.remove('act')
+})
+
+cartEl.addEventListener('click', e=>{
+  rootEl.textContent=''
+  drawCart()
+})
+
+orderedEl.addEventListener('click', e=>{
+  rootEl.textContent=''
+  drawOrder()
 })
 
 // 페이지 로드 시 그릴 화면
 drawMain()
+
+// 장바구니에 담기전에 내가 담았던 아이템들을 불러와보고, 비교해서 있으면 안넣는다. 어쨌든 비교하는 방법 밖에 없음

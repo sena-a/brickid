@@ -1,8 +1,26 @@
 @charset "utf-8";
-// @import url("normalize.css");
+@import url("normalize.css");
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 
-$main-color: white;
-
+// 스타일 초기화
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li, form, fieldset, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+	  vertical-align: baseline;
+}
 .readable-hidden{
   width: 1px;
   height: 1px;
@@ -11,29 +29,94 @@ $main-color: white;
   position: absolute;
   clip: rect(0, 0, 0, 0);
 }
-
-ul {
+ul, ol {
   list-style: none;
 }
 
+// 공통 스타일
+$main-color: white;
 body {
   background: $main-color;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
 }
 
-.menu{
-  width: 350px;
-  height: 100vh;
+// 헤더
+.container{
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+}
+.logo{
+  background: white;
   position: fixed;
-  top:0;
-  left:0;
-  background: rgb(255, 255, 72);
-  transform: translateX(-100%);
-  transition: all 800ms;
+  top: 50px;
+  width: 125px;
+  height: 30px;
+  border: 5px solid black;
+  padding-top: 20px;
+  padding-right: 5px;
+}
+.site-name{
+  font-size: 20px;
+  text-align: right;
+  vertical-align: bottom;
 }
 
-.act.menu{
-  transform: translateX(0);
+// 메뉴 영역
+.menu{
+  width: 600px;
+  position: fixed;
+  top: 50px;
+  margin-left: 150px;
+  transition: all 400ms;
+  font-weight: 400;
+  white-space: nowrap;
+  display: flex;
 }
+// 메뉴바
+.menubar{
+  width: 25px;
+  height: 30px;
+}
+.top, .middle, .bottom{
+  height: 20%;
+  border-bottom: 3px solid black;
+}
+.middle{
+  width: 17px;
+}
+.bottom{
+  width: 22px;
+}
+// 메뉴 리스트
+// 기본 숨김 처리
+.category{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 33px;
+  margin-left: 20px;
+  width: 0px;
+  transition: all 300ms;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: white;
+}
+// 메뉴바 클릭 시 나타남
+.act .category{
+  width: 450px;
+}
+// 메뉴 리스트 앞 뒤로 공간 확보
+// .category에 padding-left&right 주려고 했으나 숨김 처리시 일부 공간이 숨겨지지 않는 이슈 있음.
+.bear{
+  padding-left: 10px;
+}
+.about{
+  padding-right: 10px;
+}
+
+
+
 
 .list-title{
   text-transform: uppercase;
@@ -41,4 +124,16 @@ body {
 
 .product-thumb{
   cursor: pointer;
+}
+
+// 메인 영역
+.root{
+  padding-top: 200px;
+}
+
+
+// 테스트
+
+.signin, .signup{
+  display: none;
 }

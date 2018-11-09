@@ -6,17 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bricks for kidult</title>
   <link rel="stylesheet" href="./index.scss">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500" rel="stylesheet">
 </head>
 <body>
+  <div class="container">
+<!-- 헤더 -->
+<header class="logo">
+  <h1 class="site-name">BRICKID</h1>
+</header>
 <!-- 메뉴바 -->
-  <nav class="menu act">
+  <nav class="menu">
     <h2 class="readable-hidden">main menu</h2>
     <button class="signin">SIGN IN</button>
     <button class="signup">SIGN UP</button>
+    <div class="menubar">
+      <div class="top"></div>
+      <div class="middle"></div>
+      <div class="bottom"></div>
+    </div>
     <ul class="category">
       <li class="bear">BEAR BRICK</li>
       <li class="ku">KUBRICK</li>
       <li class="lego">BRICKHEADZ</li>
+      <li class="cart">CART</li>
+      <li class="ordered">ORDERED</li>
+      <li class="about">ABOUT</li>
     </ul>
   </nav>
 <!-- 메인페이지 -->
@@ -78,7 +92,7 @@
       </dl>
     </div>
     <button class="to-cart">add Cart</button>
-    <button class="order">Order</button>
+    <button class="fast-order">Order</button>
   </template>
 
 <!-- 카트 페이지 -->
@@ -130,6 +144,7 @@
   </template>
 
   <div class="root"></div>
+</div>
   <script src="./index.js"></script>
 </body>
 </html>
