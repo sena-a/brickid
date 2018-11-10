@@ -167,7 +167,7 @@ body {
 .product-list{
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-flow: row wrap;
   margin-top: 50px;
 }
@@ -177,7 +177,7 @@ body {
 }
 figure{
   text-align: center;
-  margin: 30px 10px;
+  margin: 30px 25px;
 }
 
 // 상품 상세 페이지
@@ -279,6 +279,7 @@ figure{
 }
 .each-ordered-list{
   padding-left: 30px;
+  width: 100%;
 }
 .ordered-id{
   height: 30px;
