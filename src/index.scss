@@ -250,11 +250,15 @@ figure{
   justify-content: space-between;
   width: 60%;
 }
+.except-title{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
 .cart-item-quantity{
   width: 40px;
   height: 20px;
 }
-
 .cart-item button{
   margin:0;
   height: 25px;
