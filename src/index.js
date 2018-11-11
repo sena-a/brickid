@@ -28,7 +28,8 @@ const templates = {
   cartItem: document.querySelector('#cart-item').content,
   ordered: document.querySelector('#ordered').content,
   eachOrdered: document.querySelector('#each-ordered').content,
-  orderedItem: document.querySelector('#ordered-item').content
+  orderedItem: document.querySelector('#ordered-item').content,
+  about: document.querySelector('#about').content
 }
 
 const rootEl = document.querySelector('.root')
@@ -464,6 +465,13 @@ async function drawOrder(){
   rootEl.appendChild(frag)
 }
 
+async function drawAbout(){
+  const frag = document.importNode(templates.about, true)
+
+  rootEl.textContent = ''
+  rootEl.appendChild(frag)
+}
+
 // 메뉴 이벤트리스너
 const menuEl = document.querySelector('.menu')
 const footerEl = document.querySelector('.footer')
@@ -537,6 +545,12 @@ orderedEl.addEventListener('click', e=>{
   menuEl.classList.remove('act')
   rootEl.textContent=''
   drawOrder()
+})
+
+aboutEl.addEventListener('click', e=>{
+  menuEl.classList.remove('act')
+  rootEl.textContent=''
+  drawAbout()
 })
 
 // 페이지 로드 시 그릴 화면

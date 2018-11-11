@@ -35,7 +35,10 @@ img{
 ul, ol {
   list-style: none;
 }
-
+a:visited, a:link, a:hover, a:link{
+  text-decoration: none;
+  color: inherit;
+}
 // 공통 스타일
 $main-color: white;
 body {
@@ -132,6 +135,7 @@ body {
 .title{
   font-size: 1.5rem;
   text-transform: uppercase;
+  display: inline-block;
 }
 .title::after{
   content:'';
@@ -188,12 +192,16 @@ body {
   width: 200px;
   cursor: pointer;
 }
-figure{
+.product-list figure{
   text-align: center;
   margin: 30px 25px;
 }
 
 // 상품 상세 페이지
+.category-title{
+  cursor: pointer;
+}
+
 .product-container{
   display:flex;
   margin: 60px auto;
@@ -334,6 +342,44 @@ figure{
   width: 40%;
   justify-content: space-between;
 }
+
+// 어바웃페이지
+
+.about-container{
+  width: 100%;
+  display: flex;
+  margin-top: 60px;
+  align-items: center;
+}
+.project{
+  width: 100%;
+  height: 200px;
+  padding: 0 20px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.project-title{
+  font-size: 1.2rem;
+  display:inline-block;
+  border-bottom: 2px solid black;
+  margin-bottom: 15px;
+}
+.github{
+  width: 150px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align:center;
+  align-items: center;
+  position: relative;
+}
+.github-thumb{
+  width: 100%;
+  border-radius: 50%;
+}
+
 
 // 풋터
 .footer{
