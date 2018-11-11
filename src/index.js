@@ -18,6 +18,7 @@ api.interceptors.request.use(function (config) {
 
 const templates = {
   mainPage: document.querySelector('#main-page').content,
+  arrivalList: document.querySelector('#arrival-list').content,
   loginForm: document.querySelector('#login-form').content,
   listPage: document.querySelector('#list-page').content,
   productItem: document.querySelector('#product-item').content,
@@ -40,8 +41,37 @@ const rootEl = document.querySelector('.root')
 // 6. 템플릿을 문서에 삽입
 
 async function drawMain(){
+  // 1. 템플릿 복사
   const frag = document.importNode(templates.mainPage, true)
+  // 2. 요소 선택
+  const arrivalEl = frag.querySelector('.arrival')
+  // 3. 필요한 데이터 불러오기
+  const {data: res} = await api.get('/products')
+  const arr = []
+    // 최신 상품 3개 불러오기
+  do{
+    arr.push(res.pop())
+  }while(arr.length < 3)
 
+  // 4. 내용 채우기
+  for(const item of arr){
+    // 1. 템플릿 복사
+    const frag = document.importNode(templates.arrivalList, true)
+    // 2. 요소 선택
+    const arrivalItemEl = frag.querySelector('.arrival-item')
+    const imgEl = frag.querySelector('.arrival-image')
+    // 3. 필요한 데이터 불러오기
+    // 4. 내용 채우기
+    imgEl.setAttribute('src', item.mainImgUrl)
+    // 5. 이벤트 리스너 등록하기
+    imgEl.addEventListener('click', e=>{
+      productDetail(item.id)
+    })
+    // 6. 템플릿을 문서에 삽입
+    arrivalEl.appendChild(frag)
+  }
+  // 5. 이벤트 리스너 등록하기
+  // 6. 템플릿을 문서에 삽입
   rootEl.textContent =''
   rootEl.appendChild(frag)
 }
