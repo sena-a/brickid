@@ -235,26 +235,26 @@ async function productDetail(id){
   })
 
   // 즉시 주문
-  // orderEl.addEventListener('click', async e=> {
-  //   // 장바구니 담기
-  //   await api.post('/cartItems',{
-  //     optionId: option[0].id,
-  //     quantity: parseInt(quantityEl.value),
-  //     ordered: true
-  //   })
+  orderEl.addEventListener('click', async e=> {
+    // 장바구니 담기
+    await api.post('/cartItems',{
+      optionId: option[0].id,
+      quantity: parseInt(quantityEl.value),
+      ordered: true
+    })
 
-  //   const {data: {id: orderId}} = await api.post('/orders', {
-  //     orderTime: Date.now() // 현재 시각을 나타내는 정수
-  //   })
+    const {data: {id: orderId}} = await api.post('/orders', {
+      orderTime: Date.now() // 현재 시각을 나타내는 정수
+    })
 
-  //   for(const cartItem of cartItemList){
-  //     // 위에서 만든 주문 객체의 id를 각 장바구니 항목의 orderId에 넣어줍니다.
-  //     await api.patch('/cartItems/'+cartItem.id, {
-  //       ordered: true,
-  //       orderId
-  //     })
-  //   }
-  // })
+    const {data: cartItems} = await api.get('/cartItems')
+
+    await api.patch('/cartItems/'+cartItems.pop().id, {
+      orderId
+    })
+
+    drawOrder()
+  })
 
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = ''
