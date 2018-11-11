@@ -171,6 +171,11 @@ body {
   padding-top: 200px;
 }
 
+// 로그인 페이지
+.login-form, .signup-form{
+  margin-top: 50px;
+}
+
 // 상품 목록 페이지
 .product-list{
   display: flex;
@@ -343,7 +348,7 @@ figure{
   background:white;
   border: 2px solid black;
   padding: 4px 7px;
-  margin: 3px 2px;
+  margin: 0 2px;
   font-weight: 400;
   line-height: 12px;
   vertical-align: bottom;

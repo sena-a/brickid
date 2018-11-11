@@ -45,10 +45,21 @@
 
 <!-- 로그인 폼 -->
   <template id="login-form">
+    <h2 class="title">SIGN IN</h2>
     <form class="login-form">
-      <input type="text" name="username" placeholder="testid: se">
-      <input type="text" name="password" placeholder="testpw: na">
+      <input type="text" name="username" placeholder="testid: test">
+      <input type="password" name="password" placeholder="testpw: test">
       <button class="signin">SIGN IN</button>
+    </form>
+  </template>
+
+<!-- 회원가입 폼 -->
+
+  <template id="signup-form">
+    <h2 class="title">SIGN UP</h2>
+    <form class="signup-form">
+      <input type="text" name="username" placeholder="sign-in available"required>
+      <input type="password" name="password" placeholder="delete account unavailable" size="25"required>
       <button class="signup">SIGN UP</button>
     </form>
   </template>

@@ -20,6 +20,7 @@ const templates = {
   mainPage: document.querySelector('#main-page').content,
   arrivalList: document.querySelector('#arrival-list').content,
   loginForm: document.querySelector('#login-form').content,
+  signupForm: document.querySelector('#signup-form').content,
   listPage: document.querySelector('#list-page').content,
   productItem: document.querySelector('#product-item').content,
   productPage: document.querySelector('#product-page').content,
@@ -98,6 +99,29 @@ async function loginForm(){
 
     localStorage.setItem('token', res.data.token)
     drawMain()
+  })
+
+  // 6. 템플릿을 문서에 삽입
+  rootEl.textContent = ''
+  rootEl.appendChild(frag)
+}
+
+async function signupForm(){
+  const frag = document.importNode(templates.signupForm, true)
+
+  const formEl = frag.querySelector('.signup-form')
+
+  formEl.addEventListener('submit', async e=>{
+    e.preventDefault()
+    const username = e.target.elements.username.value
+    const password = e.target.elements.password.value
+
+    await api.post('/users/register',{
+      username,
+      password
+    })
+
+    loginForm()
   })
 
   // 6. 템플릿을 문서에 삽입
@@ -448,6 +472,10 @@ const signupEl = footerEl.querySelector('.signup')
 
 signinEl.addEventListener('click', e=>{
   loginForm()
+})
+
+signupEl.addEventListener('click', e=>{
+  signupForm()
 })
 
 // 로고 클릭 시 메인 페이지로 이동
