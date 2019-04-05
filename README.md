@@ -8,7 +8,7 @@
 - css
 - javascript
 - axios
-- json server(김승하 강사님 제공)
+- json live server
 
 ## 초기 기획
 
