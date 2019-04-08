@@ -3,28 +3,97 @@
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
 // 스타일 초기화
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li, form, fieldset, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-	  vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+fieldset,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
 }
-img{
-  width: 100%
+img {
+  width: 100%;
 }
-.readable-hidden{
+.readable-hidden {
   width: 1px;
   height: 1px;
   overflow: hidden;
@@ -32,10 +101,14 @@ img{
   position: absolute;
   clip: rect(0, 0, 0, 0);
 }
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
-a:visited, a:link, a:hover, a:link{
+a:visited,
+a:link,
+a:hover,
+a:link {
   text-decoration: none;
   color: inherit;
 }
@@ -43,12 +116,12 @@ a:visited, a:link, a:hover, a:link{
 $main-color: white;
 body {
   background: $main-color;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 16px;
 }
 
 // 헤더
-.container{
+.container {
   width: 60%;
   margin: 0 auto;
   position: relative;
@@ -56,7 +129,7 @@ body {
   min-height: 100px;
   min-width: 350px;
 }
-.logo{
+.logo {
   background: white;
   position: fixed;
   top: 50px;
@@ -68,14 +141,14 @@ body {
   z-index: 100;
   cursor: pointer;
 }
-.site-name{
+.site-name {
   font-size: 20px;
   text-align: right;
   vertical-align: bottom;
 }
 
 // 메뉴 영역
-.menu{
+.menu {
   width: 600px;
   position: fixed;
   top: 50px;
@@ -86,24 +159,26 @@ body {
   display: flex;
 }
 // 메뉴바
-.menubar{
+.menubar {
   width: 25px;
   height: 30px;
   cursor: pointer;
 }
-.top, .middle, .bottom{
+.top,
+.middle,
+.bottom {
   height: 20%;
   border-bottom: 3px solid black;
 }
-.middle{
+.middle {
   width: 17px;
 }
-.bottom{
+.bottom {
   width: 22px;
 }
 // 메뉴 리스트
 // 기본 숨김 처리
-.category{
+.category {
   display: flex;
   justify-content: space-between;
   margin-top: 33px;
@@ -115,213 +190,219 @@ body {
   background-color: white;
 }
 // 메뉴바 클릭 시 나타남
-.act .category{
+.act .category {
   width: 450px;
 }
-.bear, .ku, .lego, .cart, .ordered, .about{
+.bear,
+.ku,
+.lego,
+.cart,
+.ordered,
+.about {
   cursor: pointer;
 }
 // 메뉴 리스트 앞 뒤로 공간 확보
 // .category에 padding-left&right 주려고 했으나 숨김 처리시 일부 공간이 숨겨지지 않는 이슈 있음.
-.bear{
+.bear {
   padding-left: 10px;
 }
-.about{
+.about {
   padding-right: 10px;
 }
 
-
 // 메인 페이지
-.title{
+.title {
   font-size: 1.5rem;
   text-transform: uppercase;
   display: inline-block;
 }
-.title::after{
-  content:'';
-  display:block;
+.title::after {
+  content: "";
+  display: block;
   width: 137px;
-  border:1.5px solid black;
+  border: 1.5px solid black;
   transform: rotate(180deg);
 }
- // 메인 페이지 new arrival 이미지
-.arrival{
+// 메인 페이지 new arrival 이미지
+.arrival {
   display: flex;
   width: 100%;
   margin-top: 40px;
   justify-content: space-between;
 }
 
-.arrival-item{
+.arrival-item {
   cursor: pointer;
   margin: 0 20px;
   position: relative;
 }
 
-.arrival-item:hover::after{
-  content:'Click for the Detail';
-  display:block;
+.arrival-item:hover::after {
+  content: "Click for the Detail";
+  display: block;
   width: 100%;
   position: absolute;
-  top:0;
+  top: 0;
   border-top: 3px solid black;
 }
 
-.arrival-image{
+.arrival-image {
   margin-top: 40px;
 }
 // 메인 영역
-.root{
+.root {
   padding-top: 200px;
 }
 
 // 로그인 페이지
-.login-form, .signup-form{
+.login-form,
+.signup-form {
   margin-top: 50px;
 }
 
 // 상품 목록 페이지
-.product-list{
+.product-list {
   display: flex;
   width: 100%;
   justify-content: flex-start;
   flex-flow: row wrap;
   margin-top: 50px;
 }
-.product-thumb{
+.product-thumb {
   width: 200px;
   cursor: pointer;
 }
-.product-list figure{
+.product-list figure {
   text-align: center;
   margin: 30px 25px;
 }
 
 // 상품 상세 페이지
-.category-title{
+.category-title {
   cursor: pointer;
 }
 
-.product-container{
-  display:flex;
+.product-container {
+  display: flex;
   margin: 60px auto;
   justify-content: flex-start;
 }
 // 이미지
-.image{
+.image {
   width: 40%;
   height: 40%;
   min-width: 200px;
 }
-.line{
-  border:2px solid black;
+.line {
+  border: 2px solid black;
   height: 45px;
   margin-left: 45px;
 }
 // 상세정보
-.info{
+.info {
   margin-left: 17px;
   min-width: 100px;
 }
-.info dl{
+.info dl {
   margin-bottom: 15px;
 }
-#quantity{
+#quantity {
   border: 2px solid black;
 }
-.amount{
+.amount {
   width: 40%;
   display: flex;
   justify-content: space-between;
 }
-.amount .term{
+.amount .term {
   font-size: 1.3rem;
 }
-.amount dd{
+.amount dd {
   line-height: 35px;
   margin-left: 10px;
 }
 
 // 카트 페이지
-.cart-list{
+.cart-list {
   margin-top: 50px;
   width: 100%;
 }
-.cart-item{
+.cart-item {
   display: flex;
   border-bottom: 2px solid black;
   padding: 30px 0;
   align-items: center;
-  justify-content: space-around
+  justify-content: space-around;
 }
-.cart-item-img{
+.cart-item-img {
   width: 20%;
-  height: 20%
+  height: 20%;
 }
-.cart-info{
+.cart-info {
   display: flex;
   justify-content: space-between;
   width: 60%;
 }
-.except-title{
+.except-title {
   display: flex;
   justify-content: space-between;
   width: 70%;
 }
-.cart-item-quantity{
+.cart-item-quantity {
   width: 40px;
   height: 20px;
 }
-.cart-item button{
-  margin:0;
+.cart-item button {
+  margin: 0;
   height: 25px;
 }
-.increase, .decrease{
+.increase,
+.decrease {
   width: 25px;
   font-size: 1rem;
 }
-.cart-item-delete{
+.cart-item-delete {
   width: 50px;
 }
-.cart-footer{
+.cart-footer {
   display: flex;
   margin-top: 15px;
   position: absolute;
   right: 0;
   align-items: center;
 }
-.cart-amount{
+.cart-amount {
   display: flex;
 }
-.total-amount{
+.total-amount {
   margin: 0 15px 0 10px;
 }
 
 // 주문 내역
-.each-ordered-container{
+.each-ordered-container {
   margin-top: 70px;
-  display:flex;
+  display: flex;
 }
-.each-ordered-list{
+.each-ordered-list {
   padding-left: 30px;
   width: 100%;
 }
-.ordered-id{
+.ordered-id {
   height: 30px;
   padding: 0 5px;
   border-top: 3px solid black;
   border-right: 3px solid black;
   font-size: 1.2rem;
 }
-.ordered-amount{
+.ordered-amount {
   display: flex;
   font-size: 1.2rem;
   // border-bottom: 3px solid black;
 }
-.ordered-total-amount{
+.ordered-total-amount {
   margin-left: 10px;
 }
-.ordered-item{
+.ordered-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -329,80 +410,76 @@ body {
   border-bottom: 2px solid black;
   padding: 30px 0;
 }
-.ordered-item-img{
-  width:20%
+.ordered-item-img {
+  width: 20%;
 }
-.ordered-item-info{
+.ordered-item-info {
   display: flex;
   width: 65%;
   justify-content: space-between;
 }
-.quantity-amount-info{
-  display:flex;
+.quantity-amount-info {
+  display: flex;
   width: 40%;
   justify-content: space-between;
 }
 
 // 어바웃페이지
 
-.about-container{
+.about-container {
   width: 100%;
   display: flex;
   margin-top: 60px;
   align-items: center;
 }
-.project{
+.project {
   width: 100%;
   height: 200px;
   padding: 0 20px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.project-title{
+.project-title {
   font-size: 1.2rem;
-  display:inline-block;
+  display: inline-block;
   border-bottom: 2px solid black;
   margin-bottom: 15px;
 }
-.github{
+.github {
   width: 150px;
   height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align:center;
+  text-align: center;
   align-items: center;
   position: relative;
 }
-.github-thumb{
+.github-thumb {
   width: 100%;
   border-radius: 50%;
 }
 
-
 // 풋터
-.footer{
-  width:100%;
+.footer {
+  width: 100%;
   height: 50px;
   position: relative;
   bottom: 0;
   font-size: 0.8rem;
   margin-top: 110px;
 }
-.signin, .signup, button{
-  background:white;
+.signin,
+.signup,
+button {
+  background: white;
   border: 2px solid black;
   padding: 4px 7px;
-  margin: 0 2px;
+  margin: 5px 2px;
   font-weight: 400;
   line-height: 12px;
   vertical-align: bottom;
   cursor: pointer;
-  font-size: 0.8rem
-}
-.copyright{
-  position: absolute;
-  right: 0;
-  font-weight: 300;
+  font-size: 0.8rem;
 }
