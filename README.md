@@ -6,7 +6,7 @@
 
 - html
 - css
-- javascript
+- vanilla javascript
 - axios
 - json live server
 
