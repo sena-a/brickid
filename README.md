@@ -6,9 +6,9 @@
 
 - html
 - css
-- vanilla javascript
+- Vanilla Javascript
 - axios
-- json live server
+- json-live-server
 
 ## 초기 기획
 
